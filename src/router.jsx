@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/home";
 
-function MainRoutes() {
+function Router() {
     return (
         <Routes>
             <Route path="*" element={<Navigate to="/" />} />
@@ -9,4 +9,4 @@ function MainRoutes() {
         </Routes>
     )
 }
-export default MainRoutes;
+export default Router;
