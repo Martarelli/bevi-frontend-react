@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import user from "../../assets/user-icon.svg"
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-  
     async function handleSubmit(event) {
         event.preventDefault();
         try {
@@ -21,11 +20,15 @@ import { useNavigate } from 'react-router-dom';
                 navigate('/dashboard');
             });
             } catch (error) {
-                alert('Ocorreu um erro com sua solicitação...')
-                console.log(error);
+                alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message)
+                console.log('Error fetching data: ' + error.message);
             }
     }
 
+    useEffect(()=> {
+        localStorage.clear();
+    },[])
+    
   return (
     <div className="container p-5">
         <h1 className="fw-bold">Login</h1>
