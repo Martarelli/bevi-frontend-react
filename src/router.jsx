@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./pages/home/home";
+import Dashboard from "./pages/dashboard/dashboard";
 import Login from "./pages/login/login";
 
 function Router() {
@@ -7,7 +7,7 @@ function Router() {
         <Routes>
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />}/>
-            <Route path="/dashboard" element={<Home />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
     )
 }
