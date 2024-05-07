@@ -21,7 +21,7 @@ function ProductList({products} ) {
   },[products])
 
   return (
-    <table className="table">
+    <table className="table table-striped">
       <thead>
         <tr>
           <th className="text-center" scope="col">Nome do Produto</th>
