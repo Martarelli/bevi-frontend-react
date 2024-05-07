@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
 import user from "../../assets/user-icon.svg"
 import { useNavigate } from 'react-router-dom';
@@ -11,24 +11,21 @@ import { useNavigate } from 'react-router-dom';
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await axios.post('http://34.71.240.100/api/auth/login', {
+            const response = await axios.post('http://34.71.240.100/api/auth/login', {
                 email: email,
                 password: password
             })
-            .then((response) => {
-                localStorage.setItem('access_token', response.data.access_token)
-                navigate('/dashboard');
-            });
+            localStorage.setItem('access_token', response.data.access_token)
+            setTimeout(() => {
+                navigate('/dashboard');   
+            }, 500);
+
             } catch (error) {
-                alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message)
+                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message)
                 console.log('Error fetching data: ' + error.message);
             }
     }
 
-    useEffect(()=> {
-        localStorage.clear();
-    },[])
-    
   return (
     <div className="container p-5">
         <h1 className="fw-bold">Login</h1>
@@ -60,7 +57,7 @@ import { useNavigate } from 'react-router-dom';
             </div>
 
             <button className="btn btn-primary d-flex w-100 align-items-center justify-content-center
-            text-bold fs-5 p-3 my-3 fw-bold" id="google" type="button" onClick={handleSubmit}>
+            text-bold fs-5 p-3 my-3 fw-bold" type="button" onClick={handleSubmit}>
                 <img className="px-2 " src={user} alt="Login" />
                 Login 
             </button>

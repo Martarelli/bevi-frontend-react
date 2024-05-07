@@ -6,8 +6,12 @@ function Header() {
         navigate('/login');
     }
 
+    const NAVBAR_STYLE = {
+        backgroundColor: 'rgba(34, 35, 68)',
+    }
+
   return (
-    <nav className="navbar navbar-dark bg-dark sticky-top navbar-expand-lg w-100 p-3">
+    <nav className="navbar navbar-dark navbar-expand-lg w-100 p-3" style={NAVBAR_STYLE}>
         <div className="container-fluid w-100 d-flex align-items-center justify-content-between">
             <div>
                 <a className="navbar-brand" href="#">Teste Bevi</a>
