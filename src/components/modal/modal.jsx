@@ -10,6 +10,7 @@ function Modal({isOpen, children}) {
     const BACKGROUND_STYLE = {
         position: 'fixed',
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
         inset: '0',
         backgroundColor: 'rgba(0, 0, 0, 0.95)',
@@ -17,12 +18,25 @@ function Modal({isOpen, children}) {
     }
 
     const MODAL_STYLE = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'fixed',
         width: '50%',
         top: '5rem',
-        padding: '5rem',
+        padding: '2rem',
         backgroundColor: '#fff',
-        borderRadius: '1rem'
+        borderRadius: '1rem',
+    }
+
+    const MODAL_STYLE_MOBILE = {
+        ...MODAL_STYLE,
+        width: '95%',
+    };
+
+    if (window.innerWidth < 768) {
+        Object.assign(MODAL_STYLE, MODAL_STYLE_MOBILE);
     }
 
     if (isOpen) {

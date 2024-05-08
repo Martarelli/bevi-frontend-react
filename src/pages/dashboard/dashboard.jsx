@@ -45,8 +45,8 @@ function Dashboard() {
         </div>
         <ProductList products={products}/>
         <Modal isOpen={isOpenCreate}>
-          <ProductCreate/>
-          <button className="btn btn-danger d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-3 my-3 fw-bold" type="button" onClick={() => {setIsOpenCreate(!isOpenCreate)
+          <ProductCreate />
+          <button className="btn btn-danger d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 fw-bold" type="button" onClick={() => {setIsOpenCreate(!isOpenCreate)
           }}>Cancelar</button>
         </Modal>
       </div>
