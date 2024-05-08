@@ -3,9 +3,23 @@
 }
 
 .background-button {
+    color: #fff;
     background-color: rgba(34, 35, 68, 1) ;
 }
 
 .background-button:hover {
+    color: #fff;
     background-color: rgba(34, 35, 68, 0.9) ;
+}
+
+.form__box {
+    width: 30%;
+    height: 50%;
+}
+
+@media (max-width: 768px) {
+    .form__box {
+        width: 95%;
+        padding: 2rem 0;
+    }
 }

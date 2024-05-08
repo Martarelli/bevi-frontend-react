@@ -4,6 +4,7 @@ import ProductList from '../../components/products/productList';
 import axios from 'axios';
 import Modal from '../../components/modal/modal';
 import ProductCreate from '../../components/products/productCreate';
+import '../../styles/dashboard.css';
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -34,21 +35,22 @@ function Dashboard() {
   return (
     <div>
       <Header/>
-      <div className="container py-2">
+      <div className="div__dashboard px-5 py-3">
         <div className="d-flex py-3 w-100 justify-content-between">
           <h1>Listagem dos Produtos</h1> 
           <button type="button" className="btn btn-success" onClick={() => {setIsOpenCreate(!isOpenCreate)
           }}> 
-            <span className="fw-bold">+ </span> 
             Adicionar Produto
           </button>
         </div>
-        <ProductList products={products}/>
-        <Modal isOpen={isOpenCreate}>
-          <ProductCreate />
-          <button className="btn btn-danger d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 fw-bold" type="button" onClick={() => {setIsOpenCreate(!isOpenCreate)
-          }}>Cancelar</button>
-        </Modal>
+        <div className="div__table">
+          <ProductList products={products}/>
+          <Modal isOpen={isOpenCreate}>
+            <ProductCreate />
+            <button className="btn btn-danger d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 fw-bold" type="button" onClick={() => {setIsOpenCreate(!isOpenCreate)
+            }}>Cancelar</button>
+          </Modal>
+        </div>
       </div>
     </div>
   )

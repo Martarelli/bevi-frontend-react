@@ -75,7 +75,7 @@ function ProductDelete({id}) {
             <h3>Deletar Produto?</h3>
             <form className='w-100'>
                 <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Name</span>
+                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Nome</span>
                     <input
                         type="text"
                         name="name"
@@ -90,7 +90,7 @@ function ProductDelete({id}) {
                 </div>
 
                 <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Price</span>
+                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Preço</span>
                     <input
                         type="number"
                         name="price"
@@ -105,7 +105,7 @@ function ProductDelete({id}) {
                 </div>
 
                 <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Description</span>
+                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Descrição</span>
                     <input
                         type="text"
                         name="description"
@@ -138,7 +138,7 @@ function ProductDelete({id}) {
                 </div>
 
                 <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Stock Quantity</span>
+                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Estoque</span>
                     <input
                         type="number"
                         name="stock_quantity"

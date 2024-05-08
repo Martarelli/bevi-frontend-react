@@ -172,7 +172,7 @@ function ProductEdit({id}) {
 
                 <div>
                     <div className="input-group input-group-sm w-100">
-                        <span className="input-group-text w-25">Qtde Estoque</span>
+                        <span className="input-group-text w-25">Estoque</span>
                         <input
                             type="number"
                             {...register("stock_quantity")}

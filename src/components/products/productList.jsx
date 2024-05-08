@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ProductDelete from './productDelete';
 import Modal from '../modal/modal';
 import ProductEdit from './productEdit';
+import '../../styles/productList.css';
 
 function ProductList({products} ) {
 
@@ -28,10 +29,6 @@ function ProductList({products} ) {
     setIsOpenDelete(!isOpenDelete);
   };
 
-  const IMG_STYLE = {
-    'height':'1.2rem'
-  }
-
   useEffect(()=>{
     setProductsList(products)
   },[products])
@@ -41,25 +38,30 @@ function ProductList({products} ) {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th className="text-center" scope="col">Nome do Produto</th>
-            <th className="text-center" scope="col">Preço</th>
-            <th className="text-center" scope="col">Descrição</th>
-            <th className="text-center" scope="col">Status</th>
-            <th className="text-center" scope="col">Qtd Estoque</th>
-            <th className="text-center" scope="col">Ação</th>
+            <th className="text-center align-middle" scope="col">Nome do Produto</th>
+            <th className="text-center align-middle" scope="col">Preço</th>
+            <th className="text-center align-middle" scope="col">Descrição</th>
+            <th className="text-center align-middle" scope="col">Status</th>
+            <th className="text-center align-middle" scope="col">Qtd Estoque</th>
+            <th className="text-center div__action align-middle" scope="col" colSpan="2">Ação</th>
           </tr>
         </thead>
         <tbody>
           {productsList.map((product, key) => (
           <tr key={key} id={product.id}>
-            <td className="text-center">{product.name}</td>
-            <td className="text-center">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-            <td className="text-center">{product.description}</td>
-            <td className="text-center">{product.status == 1 ? 'Estoque' : product.status == 2 ? 'Reposição' : 'Em Falta'}</td>
-            <td className="text-center">{product.stock_quantity}</td>
-            <td className="text-center d-flex align-items-center justify-content-evenly">
-                <a onClick={() => {openEditModal(product.id)}}><img src={editCan} style={IMG_STYLE} alt="edit"/></a>
-                <a onClick={() => {openDeleteModal(product.id)}}><img src={trashCan} style={IMG_STYLE} alt="delete"/></a>
+            <td className="text-center align-middle">{product.name}</td>
+            <td className="text-center align-middle">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            <td className="text-center align-middle">{product.description}</td>
+            <td className={"text-center align-middle"}>
+              <p className={`${product.status == 1 ? 'stock' : product.status == 2 ? 'reorder' : 'outstock'}`}>{product.status == 1 ? 'Estoque' : product.status == 2 ? 'Reposição' : 'Em Falta'}</p>
+              
+            </td>
+            <td className="text-center align-middle">{product.stock_quantity}</td>
+            <td className="text-center div__icons align-middle">
+                <div className="h100" onClick={() => {openEditModal(product.id)}}><img src={editCan} className="img__style" alt="edit"/></div>
+            </td>
+            <td className="text-center div__icons align-middle">
+                <div onClick={() => {openDeleteModal(product.id)}}><img src={trashCan} className="img__style" alt="delete"/></div>
             </td>
           </tr>
           ))}

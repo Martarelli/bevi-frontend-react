@@ -1,0 +1,11 @@
+
+@media (max-width: 768px) {
+    .div__dashboard {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+
+    .div__table {
+        overflow: scroll;
+    }
+}

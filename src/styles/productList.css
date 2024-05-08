@@ -1,0 +1,24 @@
+.img__style {
+    height:1.4rem
+}
+
+.div__action {
+    width: 8rem;
+}
+
+.div__icons {
+    width: 2rem;
+}
+
+.stock {
+    font-weight: 600;
+    color: green;
+}
+.reorder {
+    font-weight: 600;
+    color: orange;
+}
+.outstock {
+    font-weight: 600;
+    color: red;
+}

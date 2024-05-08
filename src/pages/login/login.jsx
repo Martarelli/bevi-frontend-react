@@ -29,10 +29,10 @@ import "../../styles/login.css"
 
   return (
     <div className="d-flex align-items-center justify-content-center w-100 h-100">
-        <div className="background-box rounded d-flex flex-column align-items-center justify-content-center w-50 h-50">
+        <div className="form__box background-box rounded d-flex flex-column align-items-center justify-content-center">
             <h1 className="fw-bold">Seja Bem-Vindo</h1>
             <form className="w-100 px-5" >
-                <div className="input-group input-group-lg py-3 w-100 border-primary">
+                <div className="input-group input-group-md py-3 w-100 border-primary">
                     <span className="input-group-text  w-25">Email</span>
                     <input 
                         type="text"               
@@ -45,7 +45,7 @@ import "../../styles/login.css"
                         aria-label="Email"/>
                 </div>
 
-                <div className="input-group input-group-lg py-3 w-100">
+                <div className="input-group input-group-md py-3 w-100">
                     <span className="input-group-text w-25">Senha</span>
                     <input 
                         type="password"               
@@ -58,7 +58,7 @@ import "../../styles/login.css"
                         aria-label="Password"/>
                 </div>
 
-                <button className="btn background-button btn-primary border-dark d-flex w-100 align-items-center justify-content-center
+                <button className="btn background-button border-dark d-flex w-100 align-items-center justify-content-center
                 text-bold fs-5 p-3 my-3 fw-bold" type="button" onClick={handleSubmit}>
                     <img className="px-2 " src={user} alt="Login" />
                     Login 
