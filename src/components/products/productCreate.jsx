@@ -1,29 +1,37 @@
-// import axios from 'axios';
+
 import axios from 'axios';
 import { useState } from 'react'
-import PropTypes from 'prop-types';  
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { object , string, number }  from 'yup'
+
+const schema = object({
+    name: string().required("Nome é um campo obrigatório.").min(2,"Mínimo 2 caracteres."),
+    price: number().transform((value, originalValue) => {
+        return originalValue === '' ? null : value;
+      }).required("Preço é um campo obrigatório.").moreThan(0, "Preço deve ser maior que 0."),
+    description: string().required("Descrição é um campo obrigatório."),
+    status: number().required("Status é um campo obrigatório.").moreThan(0, "Selecione uma opção."),
+    stock_quantity: number().transform((value, originalValue) => {
+        return originalValue === '' ? null : value;
+      }).required("Qtde Estoque é um campo obrigatório.").min(0),
+})
 
 function ProductCreate() {
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(undefined);
+    const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
-    const [status, setStatus] = useState(undefined);
-    const [stockQuantity, setStockQuantity] = useState(undefined);
+    const [status, setStatus] = useState(0);
+    const [stockQuantity, setStockQuantity] = useState(0);
 
-    ProductCreate.propTypes = {
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
-        status: PropTypes.number.isRequired,
-        stockQuantity: PropTypes.number.isRequired,
-    };
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({resolver: yupResolver(schema)});
 
-    async function handleSubmit(event) {
-        event.preventDefault();
+    async function onSubmit(data) {
         try {
-            console.log(status);
-            console.log(stockQuantity);
-            console.log(price);
             const token = localStorage.getItem('access_token');
             const response = await axios.create({
               baseURL: 'http://34.71.240.100/api',
@@ -31,13 +39,7 @@ function ProductCreate() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
               }
-            }).post('/product/create', {
-                name: name,
-                price: price,
-                description: description,
-                status: status,
-                stock_quantity: stockQuantity
-            })
+            }).post('/product/create', data)
             console.log(response);
             setTimeout(() => {
             window.location.reload();   
@@ -52,80 +54,96 @@ function ProductCreate() {
     return (
         <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
             <h3>Cadastrar Produto</h3>
-            <form className='w-100'>
-                <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Name</span>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        className="form-control"
-                        placeholder="Nome do Produto"
-                        aria-label="Name"
-                    />
+            <form className='w-100 d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <div className="input-group input-group-sm w-100">
+                        <span className="input-group-text w-25">Nome</span>
+                        <input
+                            type="text"
+                            {...register("name")}
+                            id="name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            className="form-control"
+                            placeholder="Nome do Produto"
+                            aria-label="Name"
+                        />
+                    </div>
+                    <span className='error__message'>{errors?.name?.message}</span>
                 </div>
 
-                <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Price</span>
-                    <input
-                        type="number"
-                        name="price"
-                        id="price"
-                        value={price}
-                        onChange={(event) => setPrice(event.target.value)}
-                        className="form-control"
-                        placeholder="Preço do Produto"
-                        aria-label="Price"
-                    />
+                <div>
+                    <div className="input-group input-group-sm w-100">
+                        <span className="input-group-text w-25">Preço</span>
+                        <input
+                            type="number"
+                            {...register("price")}
+                            id="price"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                            className="form-control"
+                            placeholder="Preço do Produto"
+                            aria-label="Price"
+                        />
+                    </div>
+                    <span className='error__message'>{errors?.price?.message}</span>
                 </div>
 
-                <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Description</span>
-                    <input
-                        type="text"
-                        name="description"
-                        id="description"
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                        className="form-control"
-                        placeholder="Descrição do Produto"
-                        aria-label="Description"
-                    />
+                <div>
+                    <div className="input-group input-group-sm  w-100">
+                        <span className="input-group-text w-25">Descrição</span>
+                        <input
+                            type="text"
+                            {...register("description")}
+                            id="description"
+                            value={description}
+                            onChange={(event) => setDescription(event.target.value)}
+                            className="form-control"
+                            placeholder="Descrição do Produto"
+                            aria-label="Description"
+                        />
+                    </div>
+                    <span className='error__message'>{errors?.description?.message}</span>
                 </div>
 
-                <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <label className="input-group-text w-25" htmlFor="status">Status</label>
-                    <select
-                        id="status"
-                        name="status"
-                        value={status}
-                        onChange={(event) => {setStatus(event.target.value)}}
-                        className="form-select"
-                        aria-label="Status"
-                    >
-                        <option value="0" disabled defaultValue={0}>Selecione o Status</option>
-                        <option value="1">Estoque</option>
-                        <option value="2">Reposição</option>
-                        <option value="3">Em falta</option>
-                    </select>
+                <div>
+                    <div className="input-group input-group-sm w-100">
+                        <label className="input-group-text w-25" htmlFor="status">Status</label>
+                        <select
+                            id="status"
+                            {...register("status")}
+                            value={status}
+                            onChange={(event) => {setStatus(event.target.value)}}
+                            className="form-select"
+                            aria-label="Status"
+                        >
+                            <option value={0} disabled >Selecione o Status</option>
+                            <option value={1}>Estoque</option>
+                            <option value={2}>Reposição</option>
+                            <option value={3}>Em falta</option>
+                        </select>
+                    </div>
+                    <span className='error__message'>{errors?.status?.message}</span>
                 </div>
 
-                <div className="input-group input-group-sm mb-3 py-1 w-100">
-                    <span className="input-group-text w-25" id="inputGroup-sizing-lg">Stock Quantity</span>
-                    <input
-                        type="number"
-                        name="stock_quantity"
-                        id="stock_quantity"
-                        value={stockQuantity}
-                        onChange={(event) => setStockQuantity(event.target.value)}
-                        className="form-control"
-                        placeholder="Quantidade em Estoque"
-                        aria-label="Stock Quantity"
-                    />
+                <div>
+                    <div className="input-group input-group-sm w-100">
+                        <span className="input-group-text w-25">Qtde Estoque</span>
+                        <input
+                            type="number"
+                            {...register("stock_quantity")}
+                            id="stock_quantity"
+                            value={stockQuantity}
+                            onChange={(event) => setStockQuantity(event.target.value)}
+                            className="form-control"
+                            placeholder="Quantidade em Estoque"
+                            aria-label="Stock Quantity"
+                        />
+                    </div>
+                    <span className='error__message'>{errors?.stock_quantity?.message}</span>
                 </div>
-                    <button className="btn btn-primary d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 my-3 fw-bold" type="button" onClick={handleSubmit}>Cadastrar</button>
+            
+                <button className="btn btn-primary d-flex w-100 align-items-center justify-content-center text-bold fs-5 mb-2 fw-bold" type="submit">Cadastrar</button>
             </form>
         </div>
     )
