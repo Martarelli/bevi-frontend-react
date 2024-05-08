@@ -14,15 +14,15 @@ function Header() {
     <nav className="navbar navbar-dark navbar-expand-lg w-100 p-3" style={NAVBAR_STYLE}>
         <div className="container-fluid w-100 d-flex align-items-center justify-content-between">
             <div>
-                <a className="navbar-brand" href="#">Teste Bevi</a>
+                <a className="navbar-brand" role='button' href="#">Teste Bevi</a>
             </div>
             <div className="" >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a className="nav-link active" role='button' aria-current="page" href="#">Dashboard</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" onClick={logout}>Logout</a>
+                        <a className="nav-link " role='button' onClick={logout}>Logout</a>
                     </li>
                 </ul>
 
