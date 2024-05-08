@@ -21,7 +21,7 @@ function Dashboard() {
       }).post('/product/list')
       setProducts(response.data.data);
     } catch (error) {
-      alert('Ocorreu um erro ao processar sua requisição...\nASASError fetching data: ' + error.message);
+      alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message);
       console.log('Error fetching data: ' + error.message);
       console.log(error);
     }
