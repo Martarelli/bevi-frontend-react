@@ -151,7 +151,7 @@ function ProductDelete({id}) {
                         disabled
                     />
                 </div>
-                    <button className="btn btn-primary d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 my-3 fw-bold" type="button" onClick={handleSubmit}>Confirmar</button>
+                    <button className="btn btn-dark d-flex w-100 align-items-center justify-content-center text-bold fs-5 p-2 my-3 fw-bold" type="button" onClick={handleSubmit}>Confirmar Exclusão</button>
             </form>
         </div>
     )
