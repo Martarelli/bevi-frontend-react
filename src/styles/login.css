@@ -1,0 +1,11 @@
+.background-box {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.background-button {
+    background-color: rgba(34, 35, 68, 1) ;
+}
+
+.background-button:hover {
+    background-color: rgba(34, 35, 68, 0.9) ;
+}
