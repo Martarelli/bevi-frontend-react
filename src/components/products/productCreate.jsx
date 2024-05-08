@@ -11,7 +11,7 @@ const schema = object({
         return originalValue === '' ? null : value;
       }).required("Preço é um campo obrigatório.").moreThan(0, "Preço deve ser maior que 0."),
     description: string().required("Descrição é um campo obrigatório."),
-    status: number().required("Status é um campo obrigatório.").moreThan(0, "Selecione uma opção."),
+    status: number().required("Status é um campo obrigatório.").min(1, "Selecione uma opção válida.").max(3,"Selecione uma opção válida."),
     stock_quantity: number().transform((value, originalValue) => {
         return originalValue === '' ? null : value;
       }).required("Qtde Estoque é um campo obrigatório.").min(0),
