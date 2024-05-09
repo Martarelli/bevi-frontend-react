@@ -1,3 +1,6 @@
+.title__text {
+    color: rgb(34, 35, 68);
+}
 
 @media (max-width: 768px) {
     .div__dashboard {

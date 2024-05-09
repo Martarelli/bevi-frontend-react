@@ -37,7 +37,7 @@ function Dashboard() {
       <Header/>
       <div className="div__dashboard px-5 py-3">
         <div className="d-flex py-3 w-100 justify-content-between">
-          <h1>Listagem dos Produtos</h1> 
+          <h1 className='title__text'>Listagem dos Produtos</h1> 
           <button type="button" className="btn btn-success" onClick={() => {setIsOpenCreate(!isOpenCreate)
           }}> 
             Adicionar Produto
