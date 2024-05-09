@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -42,6 +43,11 @@
   },
   "jest" : {
     "testEnvironment": "jest-environment-jsdom",
-    "setupFilesAfterEnv": ["<rootDir>/setup-tests.js"]
+    "setupFilesAfterEnv": ["<rootDir>/setup-tests.js"],
+    "collectCoverageFrom": [
+      "<rootDir>/src/*.{js,ts,jsx,tsx}",
+      "<rootDir>/src/**/*.{js,ts,jsx,tsx}",
+      "<rootDir>/src/**/**/*.{js,ts,jsx,tsx}"
+    ]
   }
 }
