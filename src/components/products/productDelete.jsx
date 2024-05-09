@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';  
+import { useEffect, useState } from 'react'
+import Loading from '../loading/loading';
 
 function ProductDelete({id}) {
     const [name, setName] = useState('');
@@ -8,6 +9,8 @@ function ProductDelete({id}) {
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState(0);
     const [stockQuantity, setStockQuantity] = useState(0);
+    const [isOpenLoading, setIsOpenLoading] = useState(true);
+
 
     ProductDelete.propTypes = {
         id: PropTypes.number.isRequired,
@@ -27,15 +30,16 @@ function ProductDelete({id}) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
               }
-            }).get(`/product/read?id=${id}`)
+            }).get(`/product/read?id=${id}`);
             console.log(response);
             setName(response.data.data.name);
             setPrice(response.data.data.price);
             setDescription(response.data.data.description);
             setStatus(response.data.data.status);
             setStockQuantity(response.data.data.stock_quantity);
+            setIsOpenLoading(false);
             } catch (error) {
-                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message)
+                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message);
                 console.log('Error fetching data: ' + error.message);
                 console.log(error);
             }
@@ -54,13 +58,13 @@ function ProductDelete({id}) {
               }
             }).delete('/product/delete', {
                 data:{id}
-            })
+            });
             console.log(response);
             setTimeout(() => {
             window.location.reload();   
             }, 500);
             } catch (error) {
-                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message)
+                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message);
                 console.log('Error fetching data: ' + error.message);
                 console.log(error);
             }
@@ -72,6 +76,7 @@ function ProductDelete({id}) {
 
     return (
         <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
+            <Loading isOpen={isOpenLoading}/>
             <h3>Deletar Produto?</h3>
             <form className='w-100'>
                 <div className="input-group input-group-sm mb-3 py-1 w-100">

@@ -1,10 +1,11 @@
 // import axios from 'axios';
 import axios from 'axios';
-import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";  
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object , string, number }  from 'yup';
+import Loading from '../loading/loading';
 
 const schema = object({
     name: string().required("Nome é um campo obrigatório.").min(2,"Mínimo 2 caracteres."),
@@ -24,6 +25,7 @@ function ProductEdit({id}) {
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState(0);
     const [stockQuantity, setStockQuantity] = useState(0);
+    const [isOpenLoading, setIsOpenLoading] = useState(true);
 
     ProductEdit.propTypes = {
         id: PropTypes.number.isRequired,
@@ -45,7 +47,7 @@ function ProductEdit({id}) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
               }
-            }).get(`/product/read?id=${id}`)
+            }).get(`/product/read?id=${id}`);
             console.log(response);
             setName(response.data.data.name);
             setPrice(response.data.data.price);
@@ -53,8 +55,9 @@ function ProductEdit({id}) {
             setStatus(response.data.data.status);
             setStockQuantity(response.data.data.stock_quantity);
             reset();
+            setIsOpenLoading(false);
             } catch (error) {
-                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message)
+                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message);
                 console.log('Error fetching data: ' + error.message);
                 console.log(error);
             }
@@ -85,7 +88,7 @@ function ProductEdit({id}) {
             window.location.reload();   
             }, 500);
             } catch (error) {
-                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message)
+                alert('Ocorreu um erro ao processar sua requisição...\n' + error.message);
                 console.log('Error fetching data: ' + error.message);
                 console.log(error);
             }
@@ -97,6 +100,7 @@ function ProductEdit({id}) {
 
     return (
         <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
+            <Loading isOpen={isOpenLoading}/>
             <h3>Editar Produto</h3>
             <form className='w-100 d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
                 <div>

@@ -1,13 +1,15 @@
-import Header from '../../components/header/header'
-import { useEffect, useState } from 'react';
-import ProductList from '../../components/products/productList';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Header from '../../components/header/header';
+import ProductList from '../../components/products/productList';
+import Loading from '../../components/loading/loading';
 import Modal from '../../components/modal/modal';
 import ProductCreate from '../../components/products/productCreate';
 import '../../styles/dashboard.css';
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
+  const [isOpenLoading, setIsOpenLoading] = useState(true);
   const [isOpenCreate, setIsOpenCreate] = useState(false);
 
   async function getData() {
@@ -19,8 +21,9 @@ function Dashboard() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
-      }).post('/product/list')
+      }).post('/product/list');
       setProducts(response.data.data);
+      setIsOpenLoading(false);
     } catch (error) {
       alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message);
       console.log('Error fetching data: ' + error.message);
@@ -29,11 +32,12 @@ function Dashboard() {
   }
 
   useEffect(() => {
-      getData()
+      getData();
   },[])
 
   return (
     <div>
+      <Loading isOpen={isOpenLoading}/>
       <Header/>
       <div className="div__dashboard px-5 py-3">
         <div className="d-flex py-3 w-100 justify-content-between">
