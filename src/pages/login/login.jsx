@@ -40,7 +40,7 @@ const schema = object({
     <div className="d-flex align-items-center justify-content-center w-100 h-100">
         <div className="form__box background-box rounded d-flex flex-column align-items-center justify-content-center">
             <h1 className="fw-bold">Seja Bem-Vindo</h1>
-            <form className="w-100 px-5" onSubmit={handleSubmit(onSubmit)} >
+            <form className="w-100 px-5 d-flex flex-column gap-3" onSubmit={handleSubmit(onSubmit)} >
                 <div>
                     <div className="input-group input-group-md py-1 w-100 border-primary">
                         <span className="input-group-text  w-25">Email</span>
