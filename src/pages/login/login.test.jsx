@@ -32,12 +32,26 @@ describe('Login', () => {
         expect(screen.getByLabelText('Password')).toBeInTheDocument();
     });
 
-    it('should have login button', () => { 
+    it('renders the Login component with all elements', () => {
         render( <BrowserRouter>
-                    <Login/>
-                </BrowserRouter>
+            <Login/>
+        </BrowserRouter>
         );
-        const button = screen.getByText(/Login/i);
-        fireEvent.click(button);
+        expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+    });
+
+    it('validates email and password fields', async () => {
+        render( <BrowserRouter>
+            <Login/>
+        </BrowserRouter>
+        );
+        const loginButton = screen.getByRole('button', { name: /login/i });
+      
+        fireEvent.click(loginButton);
+      
+        expect(await screen.findByText(/email é um campo obrigatório/i)).toBeInTheDocument();
+        expect(await screen.findByText(/password é um campo obrigatório/i)).toBeInTheDocument();
     });
  })
