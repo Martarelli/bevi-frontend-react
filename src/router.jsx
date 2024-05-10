@@ -6,8 +6,8 @@ function Router() {
     return (
         <Routes>
             <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login />}/>
-            <Route path="/dashboard" element={<Dashboard />}/>
+            <Route exact path="/login" element={<Login />}/>
+            <Route exact path="/dashboard" element={<Dashboard />}/>
         </Routes>
     )
 }
