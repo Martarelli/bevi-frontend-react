@@ -13,8 +13,8 @@
 }
 
 .form__box {
-    width: 30%;
-    height: 50%;
+    height: fit-content;
+    width:  fit-content;
 }
 
 @media (max-width: 768px) {

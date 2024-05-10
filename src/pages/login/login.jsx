@@ -37,8 +37,8 @@ const schema = object({
     }
 
   return (
-    <div className="d-flex align-items-center justify-content-center w-100 h-100">
-        <div className="form__box background-box rounded d-flex flex-column align-items-center justify-content-center">
+    <div className="d-flex flex-shrink-0 align-items-center justify-content-center w-100 h-100">
+        <div className="form__box background-box p-3 rounded d-flex flex-column align-items-center justify-content-center">
             <h1 className="fw-bold">Seja Bem-Vindo</h1>
             <form className="w-100 px-5 d-flex flex-column gap-3" onSubmit={handleSubmit(onSubmit)} >
                 <div>
