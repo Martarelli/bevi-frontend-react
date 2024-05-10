@@ -111,7 +111,7 @@ function ProductEdit({id}) {
                             {...register("name")}
                             id="name"
                             value={name}
-                            onChange={(event) => setName(event.target.value)}
+                            onInput={(event) => setName(event.target.value)}
                             className="form-control"
                             placeholder="Nome do Produto"
                             aria-label="Name"
@@ -128,7 +128,7 @@ function ProductEdit({id}) {
                             {...register("price")}
                             id="price"
                             value={price}
-                            onChange={(event) => setPrice(event.target.value)}
+                            onInput={(event) => setPrice(event.target.value)}
                             className="form-control"
                             placeholder="Preço do Produto"
                             aria-label="Price"
@@ -145,7 +145,7 @@ function ProductEdit({id}) {
                             {...register("description")}
                             id="description"
                             value={description}
-                            onChange={(event) => setDescription(event.target.value)}
+                            onInput={(event) => setDescription(event.target.value)}
                             className="form-control"
                             placeholder="Descrição do Produto"
                             aria-label="Description"
@@ -161,7 +161,7 @@ function ProductEdit({id}) {
                             id="status"
                             {...register("status")}
                             value={status}
-                            onChange={(event) => {setStatus(event.target.value)}}
+                            onInput={(event) => {setStatus(event.target.value)}}
                             className="form-select"
                             aria-label="Status"
                         >
@@ -182,7 +182,7 @@ function ProductEdit({id}) {
                             {...register("stock_quantity")}
                             id="stock_quantity"
                             value={stockQuantity}
-                            onChange={(event) => setStockQuantity(event.target.value)}
+                            onInput={(event) => setStockQuantity(event.target.value)}
                             className="form-control"
                             placeholder="Quantidade em Estoque"
                             aria-label="Stock Quantity"

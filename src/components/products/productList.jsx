@@ -53,7 +53,7 @@ function ProductList({products} ) {
             <td className="text-center align-middle">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
             <td className="text-center align-middle">{product.description}</td>
             <td className={"text-center align-middle"}>
-              <p className={`${product.status == 1 ? 'stock' : product.status == 2 ? 'reorder' : 'outstock'}`}>{product.status == 1 ? 'Estoque' : product.status == 2 ? 'Reposição' : 'Em Falta'}</p>
+              <span className={`${product.status == 1 ? 'stock' : product.status == 2 ? 'reorder' : 'outstock'}`}>{product.status == 1 ? 'Estoque ' : product.status == 2 ? 'Reposição' : 'Em Falta'}</span>
               
             </td>
             <td className="text-center align-middle">{product.stock_quantity}</td>
