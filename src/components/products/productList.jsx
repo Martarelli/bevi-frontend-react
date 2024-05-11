@@ -33,7 +33,6 @@ function ProductList({products} ) {
     setProductsList(products)
   },[products])
 
-  if (productsList.length > 0) {
     return (
       <div>
         <table className="table table-striped">
@@ -48,26 +47,31 @@ function ProductList({products} ) {
             </tr>
           </thead>
           <tbody>
-            {productsList.map((product, key) => (
-            <tr key={key} id={product.id}>
-              <td className="text-center align-middle">{product.name}</td>
-              <td className="text-center align-middle">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-              <td className="text-center align-middle">{product.description}</td>
-              <td className={"text-center align-middle"}>
-                <span className={`${product.status == 1 ? 'stock' : product.status == 2 ? 'reorder' : 'outstock'}`}>{product.status == 1 ? 'Estoque ' : product.status == 2 ? 'Reposição' : 'Em Falta'}</span>
-                
-              </td>
-              <td className="text-center align-middle">{product.stock_quantity}</td>
-              <td className="text-center div__icons align-middle">
-                  <div className="h100" onClick={() => {openEditModal(product.id)}}><img src={editCan} className="img__style" alt="edit"/></div>
-              </td>
-              <td className="text-center div__icons align-middle">
-                  <div onClick={() => {openDeleteModal(product.id)}}><img src={trashCan} className="img__style" alt="delete"/></div>
-              </td>
+            {productsList.length > 0 ? 
+            (productsList.map((product, key) => (
+              <tr key={key} id={product.id}>
+                <td className="text-center align-middle">{product.name}</td>
+                <td className="text-center align-middle">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                <td className="text-center align-middle">{product.description}</td>
+                <td className={"text-center align-middle"}>
+                  <span className={`${product.status == 1 ? 'stock' : product.status == 2 ? 'reorder' : 'outstock'}`}>{product.status == 1 ? 'Estoque ' : product.status == 2 ? 'Reposição' : 'Em Falta'}</span>
+                  
+                </td>
+                <td className="text-center align-middle">{product.stock_quantity}</td>
+                <td className="text-center div__icons align-middle">
+                    <div className="h100" onClick={() => {openEditModal(product.id)}}><img src={editCan} className="img__style" alt="edit"/></div>
+                </td>
+                <td className="text-center div__icons align-middle">
+                    <div onClick={() => {openDeleteModal(product.id)}}><img src={trashCan} className="img__style" alt="delete"/></div>
+                </td>
+              </tr>
+              ))
+            ) : ( 
+            <tr>
+              <td className="text-center align-middle fw-bold" colSpan={6}>NENHUM PRODUTO CADASTRADO</td>
             </tr>
-            ))}
+            )}
           </tbody>
-  
         </table>
           <Modal isOpen={isOpenEdit}>
             <ProductEdit id={selectedProductId}/>
@@ -79,29 +83,6 @@ function ProductList({products} ) {
           </Modal>  
       </div>
     );
-  } 
-  return (
-    <div>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th className="text-center align-middle" scope="col">Nome do Produto</th>
-            <th className="text-center align-middle" scope="col">Preço</th>
-            <th className="text-center align-middle" scope="col">Descrição</th>
-            <th className="text-center align-middle" scope="col">Status</th>
-            <th className="text-center align-middle" scope="col">Qtd Estoque</th>
-            <th className="text-center div__action align-middle" scope="col" colSpan="2">Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="text-center align-middle fw-bold" colSpan={6}>NENHUM PRODUTO CADASTRADO</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-
 }
 
 export default ProductList;
