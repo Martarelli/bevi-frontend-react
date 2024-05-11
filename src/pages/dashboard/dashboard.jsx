@@ -25,9 +25,15 @@ function Dashboard() {
       setProducts(response.data.data);
       setIsOpenLoading(false);
     } catch (error) {
-      alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message);
-      console.log('Error fetching data: ' + error.message);
-      console.log(error);
+      if (error.response.data.message == "Não há produtos a serem listados.")
+      {
+        console.log("nenhum produto");
+        setIsOpenLoading(false);
+      } else {
+        alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message);
+        console.log('Error fetching data: ' + error.message);
+        console.log(error);
+      }
     }
   }
 
