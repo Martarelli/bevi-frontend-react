@@ -27,7 +27,6 @@ function Dashboard() {
     } catch (error) {
       if (error.response.data.message == "Não há produtos a serem listados.")
       {
-        console.log("nenhum produto");
         setIsOpenLoading(false);
       } else {
         alert('Ocorreu um erro ao processar sua requisição...\nError fetching data: ' + error.message);
